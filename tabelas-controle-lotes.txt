@@ -1,0 +1,18 @@
+Tabelas
+
+MOVLOTNE
+MOVLOTNT
+MOVLOTCU
+MOVLOTOP
+MOVLOTDAV
+MOVLOTPC
+MOVLOTPV
+MOVLOTRQ
+
+
+onde
+
+NE - Notas da Empresa
+NT - Notas de Terceiros
+CU - Cupons
+RQ - Requisições

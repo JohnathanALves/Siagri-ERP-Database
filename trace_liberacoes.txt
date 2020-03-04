@@ -1,0 +1,64 @@
+select *
+from
+ (                                                                  select
+  distinct
+       LS.CODI_EMP, LS.CODI_LIB, coalesce(LS.DREA_LIB, LS.DATA_LIB) as
+  DATA_LIB,        LS.CODI_USU, LS.TIPO_LIB, LS.JUST_LIB, LS.CODI_TRA,
+                        LS.CODI_PSV, LS.COND_CON, LS.TABE_CTA, LS.CTRL_CBR,
+                             LS.CCFO_CFO, LS.COD1_USU, LS.CODI_IND,
+  LS.VENC_LIB,                              LS.DOCU_LIB, LS.VEXC_LIB,
+  LS.VLOR_LIB, LS.VLO2_LIB,                              LS.QTDE_LIB,
+  LS.QTD1_LIB, LS.CODI_TOP, LS.CODI_PES,
+  LS.MJUS_LIB, LS.DATA_LIB as DATA_SEN,
+       T.RAZA_TRA, CB.DESC_CTA, PS.DESC_PSV,  CD.DESC_CON,
+            CF.DESC_CFO, P.NOME_PES, ID.DESC_IND, CR.CODI_TRA as "CODI_TRA1",
+                 T1.RAZA_TRA as "RAZA_TRA1", CR.NUME_CBR, CR.SERI_CBR,
+  TP.DESC_TOP,               P1.NOME_PES as "NOME_PES1"
+                             from LIBERASENHA LS
+                                  left join TRANSAC T on (LS.CODI_TRA =
+  T.CODI_TRA)                                left join CABREC CR on
+  (LS.CTRL_CBR = CR.CTRL_CBR)                               left join TRANSAC
+  T1 on (CR.CODI_TRA = T1.CODI_TRA)                              left join
+  CABTAB CB on (LS.TABE_CTA = CB.TABE_CTA)                               left
+  join PRODSERV PS on (LS.CODI_PSV = PS.CODI_PSV)
+  left join CONDICAO CD on (LS.COND_CON = CD.COND_CON)
+       left join CFO CF on (LS.CCFO_CFO = CF.CCFO_CFO)
+            left join CADUSU US on (LS.CODI_USU = US.CODI_USU)
+                 left join PESSOAL P on (US.CODI_PES = P.CODI_PES)
+                      left join INDEXADOR ID on (LS.CODI_IND = ID.CODI_IND)
+                           left join CADUSU US1 on (LS.COD1_USU =
+  US1.CODI_USU)                             left join PESSOAL P1 on
+  (US1.CODI_PES = P1.CODI_PES)                             left join TIPOOPER
+  TP on (TP.CODI_TOP = LS.CODI_TOP)                            where DATA_LIB
+  >= '30/08/2017'   and DATA_LIB <= '30/08/2017' and ( LS.CODI_EMP = 1) and
+  (LS.TIPO_LIB in ('02')) union all select
+                                               LS.CODI_EMP, LS.CODI_LIB,
+  LS.DATA_LIB,                                          LS.CODI_USU,
+  LS.TIPO_LIB, LS.JUST_LIB, LS.CODI_TRA,
+  LS.CODI_PSV, LS.COND_CON, LS.TABE_CTA, LS.CTRL_CBR,
+      LS.CCFO_CFO, LS.COD1_USU, LS.CODI_IND, LS.VENC_LIB,
+          LS.DOCU_LIB, LS.VEXC_LIB, LS.VLOR_LIB, LS.VLO2_LIB,
+              LS.QTDE_LIB, LS.QTD1_LIB, LS.CODI_TOP, LS.CODI_PES,
+                  LS.MJUS_LIB, LS.DATA_LIB as DATA_SEN,  T.RAZA_TRA,
+                      CB.DESC_CTA, PS.DESC_PSV,  CD.DESC_CON, CF.DESC_CFO,
+                          P.NOME_PES, ID.DESC_IND, CR.CODI_TRA as "CODI_TRA1",
+                              T1.RAZA_TRA as "RAZA_TRA1", CR.NUME_CBR,
+  CR.SERI_CBR,                           TP.DESC_TOP, P1.NOME_PES as
+  "NOME_PES1"                                    from SENHARECUSA LS
+                                                     left join TRANSAC T on
+  (LS.CODI_TRA = T.CODI_TRA)                               left join CABREC
+  CR on (LS.CTRL_CBR = CR.CTRL_CBR)                              left join
+  TRANSAC T1 on (CR.CODI_TRA = T1.CODI_TRA)                             left
+  join CABTAB CB on (LS.TABE_CTA = CB.TABE_CTA)
+  left join PRODSERV PS on (LS.CODI_PSV = PS.CODI_PSV)
+      left join CONDICAO CD on (LS.COND_CON = CD.COND_CON)
+          left join CFO CF on (LS.CCFO_CFO = CF.CCFO_CFO)
+              left join CADUSU US on (LS.CODI_USU = US.CODI_USU)
+                  left join PESSOAL P on (US.CODI_PES = P.CODI_PES)
+                      left join INDEXADOR ID on (LS.CODI_IND = ID.CODI_IND)
+                          left join CADUSU US1 on (LS.COD1_USU = US1.CODI_USU)
+                              left join PESSOAL P1 on (US1.CODI_PES =
+  P1.CODI_PES)                            left join TIPOOPER TP on
+  (TP.CODI_TOP = LS.CODI_TOP)                           where DATA_LIB >=
+  '01/08/2017'   and DATA_LIB <= '30/08/2017' and ( LS.CODI_EMP = 1) and
+  (LS.TIPO_LIB in ('02')))order by MJUS_LIB desc, DATA_LIB

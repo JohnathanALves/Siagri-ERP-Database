@@ -1,0 +1,3 @@
+A tabelas que gerenciam as permissões de acesso do siagri são:
+
+ ACEEMP, AGREMP, ACEGRP, CADACE, IOPCOES

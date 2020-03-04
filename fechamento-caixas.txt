@@ -1,0 +1,24 @@
+Para fechar os caixas passados pelo banco é necessário mudar o valor dos registros
+
+SITU_FFI para 'F'
+
+nas tabelas FECHAFIN e IFECHAFIN
+
+IFECHAFIN é dependente de FECHAFIN
+
+Query:
+
+    SELECT I.CODI_FFI
+    FROM
+        FECHAFIN F
+        LEFT JOIN IFECHAFIN I ON (F.CODI_FFI = I.CODI_FFI)
+    WHERE I.SITU_FFI != 'F' AND F.DATA_FFI BETWEEN '01/01/2010' AND '31/03/2018'
+
+UPDATE IFECHAFIN SET SITU_FFI = 'F' WHERE CODI_FFI IN 
+(
+    SELECT I.CODI_FFI
+    FROM
+        FECHAFIN F
+        LEFT JOIN IFECHAFIN I ON (F.CODI_FFI = I.CODI_FFI)
+    WHERE I.SITU_FFI != 'F' AND F.DATA_FFI BETWEEN '01/01/2010' AND '31/03/2018'
+);

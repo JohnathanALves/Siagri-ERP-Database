@@ -1,0 +1,11 @@
+Situação SITU_CHR na tabela CHEQUEREC.
+
+A - Aberto
+B - Depositado
+C - Cancelado
+D - Devolvido
+E - Estornado
+F - Descontado
+N - Fornecedor
+T - Custodiado
+X - Baixado
